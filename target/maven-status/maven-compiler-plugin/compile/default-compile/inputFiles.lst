@@ -1,0 +1,15 @@
+/home/guinafelix/dev/tjw2024.2/src/main/java/br/edu/br/meuprimeirospringboot/MeuprimeirospringbootApplication.java
+/home/guinafelix/dev/tjw2024.2/src/main/java/br/edu/br/meuprimeirospringboot/config/SecurityConfig.java
+/home/guinafelix/dev/tjw2024.2/src/main/java/br/edu/br/meuprimeirospringboot/controllers/AlunoController.java
+/home/guinafelix/dev/tjw2024.2/src/main/java/br/edu/br/meuprimeirospringboot/controllers/HomeController.java
+/home/guinafelix/dev/tjw2024.2/src/main/java/br/edu/br/meuprimeirospringboot/entity/Aluno.java
+/home/guinafelix/dev/tjw2024.2/src/main/java/br/edu/br/meuprimeirospringboot/entity/Endereco.java
+/home/guinafelix/dev/tjw2024.2/src/main/java/br/edu/br/meuprimeirospringboot/entity/Professor.java
+/home/guinafelix/dev/tjw2024.2/src/main/java/br/edu/br/meuprimeirospringboot/entity/Telefone.java
+/home/guinafelix/dev/tjw2024.2/src/main/java/br/edu/br/meuprimeirospringboot/repository/AlunoRepository.java
+/home/guinafelix/dev/tjw2024.2/src/main/java/br/edu/br/meuprimeirospringboot/repository/AlunosCustimReoository.java
+/home/guinafelix/dev/tjw2024.2/src/main/java/br/edu/br/meuprimeirospringboot/repository/EnderecoRepository.java
+/home/guinafelix/dev/tjw2024.2/src/main/java/br/edu/br/meuprimeirospringboot/repository/ProfessorRepository.java
+/home/guinafelix/dev/tjw2024.2/src/main/java/br/edu/br/meuprimeirospringboot/repository/TelefoneRepository.java
+/home/guinafelix/dev/tjw2024.2/src/main/java/br/edu/br/meuprimeirospringboot/service/AlunoService.java
+/home/guinafelix/dev/tjw2024.2/src/main/java/br/edu/br/meuprimeirospringboot/serviceImpl/AlunoServiceImpl.java

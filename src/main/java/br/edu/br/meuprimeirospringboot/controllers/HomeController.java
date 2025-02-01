@@ -2,13 +2,19 @@ package br.edu.br.meuprimeirospringboot.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 
 @Controller
 public class HomeController {
 	
 	@GetMapping("/")
-	String index() {
-		return "home";
-	}
+    public String home(Model model) {
+        model.addAttribute("titulo", "Home");
+        return "index";
+    }
 
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
 }

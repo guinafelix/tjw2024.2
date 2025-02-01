@@ -27,6 +27,13 @@
 						<i class="oi oi-menu"></i>
 					</button>
 					<a class="navbar-brand navbar-toggle pull-left" href="#">TJW 2024.2</a>
+					<a th:href="@{/logout}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+										    Logout
+										</a>
+
+										<form id="logout-form" th:action="@{/logout}" method="POST" style="display: none;">
+										    <input type="hidden" name="_csrf" value="${_csrf.token}">
+										</form>
 				</div>
 			</div>
 		</nav>
