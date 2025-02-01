@@ -1,7 +1,7 @@
 package br.edu.br.meuprimeirospringboot.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "tbl_turma")
@@ -19,10 +19,18 @@ public class Turma {
     @JoinColumn(name = "semestre_id", nullable = false)
     private Semestre semestre;
 
-    private LocalDate dataInicio;
-    private LocalDate dataFim;
+    @ManyToOne
+    @JoinColumn(name = "professor_id", nullable = false)
+    private Professor professor;
+
+    @Column(name = "hora_inicio", nullable = false)
+    private LocalTime horaInicio;
+
+    @Column(name = "hora_fim", nullable = false)
+    private LocalTime horaFim;
 
     // Getters e Setters
+
     public Long getId() {
         return id;
     }
@@ -47,19 +55,27 @@ public class Turma {
         this.semestre = semestre;
     }
 
-    public LocalDate getDataInicio() {
-        return dataInicio;
+    public Professor getProfessor() {
+        return professor;
     }
 
-    public void setDataInicio(LocalDate dataInicio) {
-        this.dataInicio = dataInicio;
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
-    public LocalDate getDataFim() {
-        return dataFim;
+    public LocalTime getHoraInicio() {
+        return horaInicio;
     }
 
-    public void setDataFim(LocalDate dataFim) {
-        this.dataFim = dataFim;
+    public void setHoraInicio(LocalTime horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public LocalTime getHoraFim() {
+        return horaFim;
+    }
+
+    public void setHoraFim(LocalTime horaFim) {
+        this.horaFim = horaFim;
     }
 }

@@ -42,7 +42,8 @@ body {
     border-right: 1px solid #eee;    
     background-color: #f8f9fa;
     flex-shrink: 0;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     transition: width .5s;
 }
 
@@ -103,7 +104,7 @@ body {
  * Footer
  */
 .layout-footer {
-	position: fixed;
+	position: relative;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -117,4 +118,67 @@ body {
 	display: block;
 	color: #777777;
 	text-align: center;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.form-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+.form-group {
+    margin-bottom: 1rem;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+.form-group input:focus {
+    border-color: #1e94d2;
+    outline: none;
+}
+.form-group button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #1e94d2;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.form-group button:hover {
+    background-color: #155a86;
+}
+.form-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #777;
+}
+.form-footer a {
+    color: #1e94d2;
+    text-decoration: none;
+}
+.form-footer a:hover {
+    text-decoration: underline;
 }

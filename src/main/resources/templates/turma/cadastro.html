@@ -1,0 +1,57 @@
+<div th:fragment="conteudo">
+  <section class="layout-content">
+      <div class="page-header">
+          <nav class="navbar navbar-expand-md navbar-light bg-light">
+              <a class="btn btn-primary btn-md" href="/turmas/listar" role="button">
+                  <span class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span>
+                  <span>Listar Turmas</span>
+              </a>
+          </nav>
+      </div>
+  
+      <div class="container" id="form-cadastro">
+        <form th:action="${turma.id == null} ? @{/turmas/salvar} : @{/turmas/editar}" method="POST" th:object="${turma}">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="disciplina">Disciplina</label>
+                    <select class="form-control" id="disciplina" th:field="*{disciplina.id}" required>
+                        <option th:each="disciplina : ${disciplinas}" th:value="${disciplina.id}" th:text="${disciplina.nome}"></option>
+                    </select>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="semestre">Semestre</label>
+                    <select class="form-control" id="semestre" th:field="*{semestre.id}" required>
+                        <option th:each="semestre : ${semestres}" th:value="${semestre.id}" th:text="${semestre.ano} + ' - ' + ${semestre.semestre}"></option>
+                    </select>
+                </div>
+  
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="professor">Professor</label>
+                    <select class="form-control" id="professor" th:field="*{professor.id}" required>
+                        <option th:each="professor : ${professores}" th:value="${professor.id}" th:text="${professor.nome}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="horaInicio">Hora Início</label>
+                    <input type="time" class="form-control" id="horaInicio" th:field="*{horaInicio}" required />
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="horaFim">Hora Fim</label>
+                    <input type="time" class="form-control" id="horaFim" th:field="*{horaFim}" required />
+                </div>
+            </div>
+  
+            <input type="hidden" th:field="*{id}" />
+            <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+        </form>
+      </div>
+  </section>
+</div>

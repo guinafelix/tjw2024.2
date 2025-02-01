@@ -1,0 +1,25 @@
+<div th:fragment="conteudo">
+    <section class="layout-content">
+        <div class="page-header">
+            <nav class="navbar navbar-expand-md navbar-light bg-light">
+                <a class="btn btn-primary btn-md" href="/professores/listar" role="button">
+                    <span class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span>
+                    <span>Listar Professores</span>
+                </a>
+            </nav>
+        </div>
+    
+        <div class="container" id="form-cadastro">
+            <form th:action="${professor.id == null} ? @{/professores/salvar} : @{/professores/editar}" method="POST" th:object="${professor}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nome">Nome do Professor</label>
+                        <input type="text" class="form-control" id="nome" placeholder="Nome Completo" th:field="*{nome}" required />
+                    </div>
+                </div>
+                <input type="hidden" th:field="*{id}" />
+                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+            </form>
+        </div>
+    </section>
+</div>

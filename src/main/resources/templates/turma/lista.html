@@ -1,0 +1,47 @@
+<div th:fragment="conteudo">
+  <section class="layout-content">
+    <nav class="navbar navbar-expand-md bg-light">
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <a class="btn btn-primary btn-md" href="/turmas/cadastrar" role="button">
+          <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+          <span>Cadastrar Turma</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover table-sm">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Disciplina</th>
+              <th>Semestre</th>
+              <th>Hora Inicio</th>
+              <th>Hora Fim</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="turma : ${turmas}">
+              <td th:text="${turma.id}">1</td>
+              <td th:text="${turma.disciplina.nome}">Matemática</td>
+              <td th:text="${turma.semestre.ano} + ' - ' + ${turma.semestre.semestre}">2025 - 1º Semestre</td>
+              <td th:text="${turma.horaInicio}">8:00</td>
+              <td th:text="${turma.horaFim}">10:00</td>
+              <td>
+                <a class="btn btn-info btn-sm" th:href="@{/turmas/editar/{id} (id=${turma.id})}" role="button">
+                  <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
+                </a>
+
+                <a class="btn btn-danger btn-sm" th:href="@{/turmas/excluir/{id} (id=${turma.id})}" role="button">
+                  <span class="oi oi-trash" title="Excluir" aria-hidden="true"></span>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,44 @@
+<div th:fragment="conteudo">
+  <section class="layout-content">
+      <div class="page-header">
+          <nav class="navbar navbar-expand-md navbar-light bg-light">
+              <a class="btn btn-primary btn-md" href="/semestres/listar" role="button">
+                  <span class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span>
+                  <span>Listar Semestres</span>
+              </a>
+          </nav>
+      </div>
+  
+      <div class="container" id="form-cadastro">
+        <form th:action="${semestre.id == null} ? @{/semestres/salvar} : @{/semestres/editar}" method="POST" th:object="${semestre}">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="ano">Ano</label>
+                    <input type="text" class="form-control" id="ano" placeholder="Ano do Semestre" th:field="*{ano}" required />
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="semestre">Semestre</label>
+                    <select class="form-control" id="semestre" th:field="*{semestre}" required>
+                        <option value="1">1º Semestre</option>
+                        <option value="2">2º Semestre</option>
+                    </select>
+                </div>
+  
+                <div class="form-group col-md-6">
+                    <label for="dataInicio">Data de Início</label>
+                    <input type="date" class="form-control" id="dataInicio" th:field="*{dataInicio}" required />
+                </div>
+  
+                <div class="form-group col-md-6">
+                    <label for="dataFim">Data de Término</label>
+                    <input type="date" class="form-control" id="dataFim" th:field="*{dataFim}" required />
+                </div>
+            </div>
+            
+            <input type="hidden" th:field="*{id}" />
+            <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+        </form>
+      </div>
+  </section>
+</div>

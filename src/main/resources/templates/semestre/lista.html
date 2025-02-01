@@ -1,0 +1,47 @@
+<div th:fragment="conteudo">
+  <section class="layout-content">
+    <nav class="navbar navbar-expand-md bg-light">
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <a class="btn btn-primary btn-md" href="/semestres/cadastrar" role="button">
+          <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+          <span>Cadastrar Semestre</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover table-sm">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Ano</th>
+              <th>Semestre</th>
+              <th>Data Início</th>
+              <th>Data Término</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="semestre : ${semestres}">
+              <td th:text="${semestre.id}">1</td>
+              <td th:text="${semestre.ano}">2025</td>
+              <td th:text="${semestre.semestre}">1º Semestre</td>
+              <td th:text="${semestre.dataInicio}">01/02/2025</td>
+              <td th:text="${semestre.dataFim}">30/06/2025</td>
+              <td>
+                <a class="btn btn-info btn-sm" th:href="@{/semestres/editar/{id} (id=${semestre.id})}" role="button">
+                  <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
+                </a>
+
+                <a class="btn btn-danger btn-sm" th:href="@{/semestres/excluir/{id} (id=${semestre.id})}" role="button">
+                  <span class="oi oi-trash" title="Excluir" aria-hidden="true"></span>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>

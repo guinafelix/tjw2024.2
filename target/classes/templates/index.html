@@ -11,6 +11,7 @@
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet" />
     <link href="/css/style.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -24,9 +25,6 @@
             </div>
         </section>
     </div>
-
-    <footer class="layout-footer" th:insert="~{fragments/footer :: footer}">
-    </footer>
 
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
@@ -43,4 +41,6 @@
         });
     </script>
 </body>
+<footer class="layout-footer" th:insert="~{fragments/footer :: footer}">
+</footer>
 </html>

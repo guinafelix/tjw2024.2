@@ -78,6 +78,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+		<dependency>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-core</artifactId>
+		</dependency>
 
 	</dependencies>
 
@@ -87,6 +91,18 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-maven-plugin</artifactId>
+            <version>4.15.0</version>
+            <configuration>
+                <changeLogFile>src/main/resources/db/changelog/master.xml</changeLogFile>
+                <url>jdbc:mysql://localhost:3308/tjw</url>
+                <username>upaUser</username>
+                <password>Up@!2022</password>
+								<outputChangeLogFile>src/main/resources/db/changelog/changelog-1.0.xml</outputChangeLogFile>
+            </configuration>
+        </plugin>
 		</plugins>
 	</build>
 
