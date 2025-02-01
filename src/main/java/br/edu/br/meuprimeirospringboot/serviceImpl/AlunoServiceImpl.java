@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.br.meuprimeirospringboot.entity.Aluno;
-import br.edu.br.meuprimeirospringboot.entity.Telefone;
 import br.edu.br.meuprimeirospringboot.repository.AlunoRepository;
 import br.edu.br.meuprimeirospringboot.service.AlunoService;
 

@@ -1,0 +1,41 @@
+<div th:fragment="conteudo">
+  <section class="layout-content">
+      <div class="page-header">
+          <nav class="navbar navbar-expand-md navbar-light bg-light">
+              <a class="btn btn-primary btn-md" href="/disciplinas/listar" role="button">
+                  <span class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span>
+                  <span>Listar Disciplinas</span>
+              </a>
+          </nav>
+      </div>
+  
+      <div class="container" id="form-cadastro">
+        <form th:action="${disciplina.id == null} ? @{/disciplinas/salvar} : @{/disciplinas/editar}" method="POST" th:object="${disciplina}">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="nome">Nome da Disciplina</label>
+                    <input type="text" class="form-control" id="nome" placeholder="Nome da Disciplina" th:field="*{nome}" required />
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="codigo">Código</label>
+                    <input type="text" class="form-control" id="codigo" placeholder="Código da Disciplina" th:field="*{codigo}" required />
+                </div>
+  
+                <div class="form-group col-md-6">
+                    <label for="ementa">Ementa</label>
+                    <textarea class="form-control" id="ementa" placeholder="Ementa da Disciplina" th:field="*{ementa}" rows="3"></textarea>
+                </div>
+  
+                <div class="form-group col-md-6">
+                    <label for="cargaHoraria">Carga Horária</label>
+                    <input type="number" class="form-control" id="cargaHoraria" placeholder="Carga Horária (em horas)" th:field="*{cargaHoraria}" required />
+                </div>
+            </div>
+            
+            <input type="hidden" th:field="*{id}" />
+            <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+        </form>
+      </div>
+  </section>
+</div>

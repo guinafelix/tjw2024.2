@@ -14,32 +14,18 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-inverse navbar navbar-dark bg-dark fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="btn btn-dark navbar-toggle pull-left">
-                        <i class="oi oi-menu"></i>
-                    </button>
-                    <a class="navbar-brand" href="#" ></a>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <header th:insert="~{fragments/header :: header}"></header>
 
     <div class="layout-main">
         <aside th:insert="~{fragments/menu :: menu}"></aside>
 
         <section class="layout-content">
-            <div class="container" th:insert="~{home :: conteudo}">
+            <div class="container" th:insert="~{${conteudo} :: conteudo}">
             </div>
         </section>
     </div>
 
-    <footer class="layout-footer">
-        <div class="container">
-            <span class="footer-copy"></span>
-        </div>
+    <footer class="layout-footer" th:insert="~{fragments/footer :: footer}">
     </footer>
 
     <script src="/webjars/jquery/jquery.min.js"></script>

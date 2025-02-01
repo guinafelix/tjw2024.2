@@ -20,13 +20,17 @@ public class AlunoController {
 	@GetMapping("/listar")
 	String ListarAlunos(ModelMap model){
 		model.addAttribute("alunos", aluno.buscarTodos());
-		return "/aluno/lista";
+		model.addAttribute("titulo", "Listar alunos"); 
+		model.addAttribute("conteudo", "aluno/lista"); 
+		return "index";
 	}	
 	
 	@GetMapping("/cadastrar")
 	String CadastrarAlunos(ModelMap model){
 		model.addAttribute("aluno",new Aluno());
-		return "/aluno/cadastro";
+		model.addAttribute("titulo", "Cadastrar aluno");
+		model.addAttribute("conteudo", "/aluno/cadastro");
+		return "index";
 	}
 	
 	@PostMapping("/salvar")
