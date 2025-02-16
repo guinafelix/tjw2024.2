@@ -1,0 +1,68 @@
+<div th:fragment="conteudo">
+  <section class="layout-content">
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Matricular Alunos na Turma</h5>
+        </div>
+        <div class="card-body">
+          <form th:action="@{/turmas/matricular/salvar}" method="POST">
+            <input type="hidden" name="turmaId" th:value="${turma.id}" />
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="turmaInfo" class="form-label">Turma</label>
+                <input type="text" class="form-control" id="turmaInfo" 
+                       th:value="${turma.disciplina.nome + ' - ' + turma.semestre.ano + '/' + turma.semestre.semestre}" 
+                       readonly />
+              </div>
+              <div class="col-md-6">
+                <label for="professor" class="form-label">Professor</label>
+                <input type="text" class="form-control" id="professor" 
+                       th:value="${turma.professor.nome}" readonly />
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-12">
+                <label for="alunosSelect" class="form-label">Selecione os Alunos</label>
+                <select class="form-control" id="alunosSelect" name="alunosIds" multiple>
+                  <option th:each="aluno : ${alunosDisponiveis}"
+                          th:value="${aluno.id}"
+                          th:text="${aluno.nome + ' - ' + aluno.matricula}">
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">
+                  <span class="oi oi-check"></span> Confirmar Matrículas
+                </button>
+                <a class="btn btn-secondary" th:href="@{/turmas/listar}">
+                  <span class="oi oi-x"></span> Cancelar
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Include Select2 for better multiple select experience -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  
+  <script>
+    $(document).ready(function() {
+      $('#alunosSelect').select2({
+        placeholder: 'Pesquise por nome ou matrícula...',
+        width: '100%',
+        language: 'pt-BR',
+        allowClear: true
+      });
+    });
+  </script>
+</div>

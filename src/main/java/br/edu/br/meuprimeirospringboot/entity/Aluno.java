@@ -11,6 +11,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -40,6 +42,14 @@ public class Aluno {
 	
 	@Temporal(TemporalType.TIME)
 	private Date dtNascimento;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "aluno_turma",
+			joinColumns = @JoinColumn(name = "aluno_id"),
+			inverseJoinColumns = @JoinColumn(name = "turma_id")
+	)
+  private List<Turma> turmas = new ArrayList<>();
 	
 	@Transient
 	private int idade;
@@ -99,5 +109,18 @@ public class Aluno {
 		this.professores = professores;
 	}
 	
-	
+	public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+	public void setTurmas(List<Turma> turmas) {
+			this.turmas = turmas;
+	}
+
+	public void matricularEmTurma(Turma turma) {
+			if (!turmas.contains(turma)) {
+					turmas.add(turma);
+					turma.getAlunos().add(this);
+			}
+	}
 }

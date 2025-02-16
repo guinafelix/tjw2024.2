@@ -5,8 +5,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import br.edu.br.meuprimeirospringboot.entity.Aluno;
 import br.edu.br.meuprimeirospringboot.entity.Turma;
+import br.edu.br.meuprimeirospringboot.repository.AlunoRepository;
 import br.edu.br.meuprimeirospringboot.repository.TurmaRepository;
 import br.edu.br.meuprimeirospringboot.service.TurmaService;
 
@@ -15,6 +18,9 @@ public class TurmaServiceImpl implements TurmaService {
 
     @Autowired
     private TurmaRepository turmaRepository;
+
+    @Autowired
+    private AlunoRepository alunoRepository;
 
     @Override
     public List<Turma> buscarTodas() {
@@ -55,5 +61,20 @@ public class TurmaServiceImpl implements TurmaService {
     @Override
     public Optional<Turma> buscarPorDisciplinaESemestre(Long disciplinaId, Long semestreId) {
         return turmaRepository.findTurmaByDisciplinaAndSemestre(disciplinaId, semestreId);
+    }
+
+    @Override
+    @Transactional
+    public void matricularAlunos(Long turmaId, List<Long> alunosIds) {
+        Turma turma = turmaRepository.findById(turmaId)
+            .orElseThrow(() -> new RuntimeException("Turma não encontrada"));
+
+        List<Aluno> alunos = alunoRepository.findAllById(alunosIds);
+        
+        for (Aluno aluno : alunos) {
+            turma.getAlunos().add(aluno);
+        }
+        
+        turmaRepository.save(turma);
     }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.br.meuprimeirospringboot.entity.Aluno;
 import br.edu.br.meuprimeirospringboot.repository.AlunoRepository;
@@ -43,4 +44,10 @@ public class AlunoServiceImpl  implements AlunoService{
 		al.setMatricula(a.getMatricula());
 		return aluno.save(al);
 	}
+
+	@Override
+    @Transactional(readOnly = true)
+    public List<Aluno> buscarAlunosNaoMatriculados(Long turmaId) {
+        return aluno.findAlunosNaoMatriculados(turmaId);
+    }
 }

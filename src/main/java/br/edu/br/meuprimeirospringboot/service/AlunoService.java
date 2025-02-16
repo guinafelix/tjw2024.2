@@ -17,6 +17,6 @@ public interface AlunoService {
 	
 	Aluno editar(Aluno a);
 	
-	
+	List<Aluno> buscarAlunosNaoMatriculados(Long turmaId);
 
 }

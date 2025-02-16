@@ -2,6 +2,8 @@ package br.edu.br.meuprimeirospringboot.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tbl_turma")
@@ -28,6 +30,9 @@ public class Turma {
 
     @Column(name = "hora_fim", nullable = false)
     private LocalTime horaFim;
+
+    @ManyToMany(mappedBy = "turmas")
+    private List<Aluno> alunos = new ArrayList<>();
 
     // Getters e Setters
 
@@ -77,5 +82,13 @@ public class Turma {
 
     public void setHoraFim(LocalTime horaFim) {
         this.horaFim = horaFim;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
     }
 }

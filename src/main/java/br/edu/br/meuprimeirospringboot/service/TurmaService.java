@@ -22,4 +22,6 @@ public interface TurmaService {
     List<Turma> buscarPorSemestre(Long semestreId);
 
     Optional<Turma> buscarPorDisciplinaESemestre(Long disciplinaId, Long semestreId);
+
+    void matricularAlunos(Long turmaId, List<Long> alunosIds);
 }
