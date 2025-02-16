@@ -2,9 +2,7 @@ package br.edu.br.meuprimeirospringboot.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
