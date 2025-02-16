@@ -1,5 +1,6 @@
 package br.edu.br.meuprimeirospringboot.serviceImpl;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,12 +70,34 @@ public class TurmaServiceImpl implements TurmaService {
         Turma turma = turmaRepository.findById(turmaId)
             .orElseThrow(() -> new RuntimeException("Turma não encontrada"));
 
-        List<Aluno> alunos = alunoRepository.findAllById(alunosIds);
+        List<Aluno> alunosParaMatricular = alunoRepository.findAllById(alunosIds);
         
-        for (Aluno aluno : alunos) {
+        if (turma.getAlunos() == null) {
+            turma.setAlunos(new HashSet<>());
+        }
+
+        for (Aluno aluno : alunosParaMatricular) {
             turma.getAlunos().add(aluno);
+            if (aluno.getTurmas() == null) {
+                aluno.setTurmas(new HashSet<>());
+            }
+            aluno.getTurmas().add(turma);
         }
         
+        turmaRepository.save(turma);
+        alunoRepository.saveAll(alunosParaMatricular);
+    }
+
+    @Override
+    @Transactional
+    public void removerAluno(Long turmaId, Long alunoId) {
+        Turma turma = turmaRepository.findById(turmaId)
+            .orElseThrow(() -> new RuntimeException("Turma não encontrada"));
+            
+        Aluno aluno = alunoRepository.findById(alunoId)
+            .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+            
+        turma.getAlunos().remove(aluno);
         turmaRepository.save(turma);
     }
 }

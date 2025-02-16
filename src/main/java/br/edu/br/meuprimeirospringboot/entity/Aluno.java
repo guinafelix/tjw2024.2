@@ -2,7 +2,9 @@ package br.edu.br.meuprimeirospringboot.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -43,13 +45,8 @@ public class Aluno {
 	@Temporal(TemporalType.TIME)
 	private Date dtNascimento;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(
-			name = "aluno_turma",
-			joinColumns = @JoinColumn(name = "aluno_id"),
-			inverseJoinColumns = @JoinColumn(name = "turma_id")
-	)
-  private List<Turma> turmas = new ArrayList<>();
+	@ManyToMany(mappedBy = "alunos", fetch = FetchType.LAZY)
+  private Set<Turma> turmas = new HashSet<>();
 	
 	@Transient
 	private int idade;
@@ -109,18 +106,32 @@ public class Aluno {
 		this.professores = professores;
 	}
 	
-	public List<Turma> getTurmas() {
-        return turmas;
-    }
-
-	public void setTurmas(List<Turma> turmas) {
-			this.turmas = turmas;
+	public Set<Turma> getTurmas() {
+		return turmas;
 	}
 
-	public void matricularEmTurma(Turma turma) {
-			if (!turmas.contains(turma)) {
-					turmas.add(turma);
-					turma.getAlunos().add(this);
+	public void setTurmas(Set<Turma> turmas) {
+			if (this.turmas != null) {
+					for (Turma turma : this.turmas) {
+							turma.getAlunos().remove(this);
+					}
+			}
+			this.turmas = turmas;
+			if (turmas != null) {
+					for (Turma turma : turmas) {
+							turma.getAlunos().add(this);
+					}
 			}
 	}
+
+	public void addTurma(Turma turma) {
+			this.turmas.add(turma);
+			turma.getAlunos().add(this);
+	}
+
+	public void removeTurma(Turma turma) {
+			this.turmas.remove(turma);
+			turma.getAlunos().remove(this);
+	}
+
 }

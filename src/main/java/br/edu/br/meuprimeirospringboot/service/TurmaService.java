@@ -24,4 +24,6 @@ public interface TurmaService {
     Optional<Turma> buscarPorDisciplinaESemestre(Long disciplinaId, Long semestreId);
 
     void matricularAlunos(Long turmaId, List<Long> alunosIds);
+
+    void removerAluno(Long turmaId, Long alunoId);
 }

@@ -25,5 +25,4 @@ public interface TurmaRepository extends JpaRepository<Turma, Long> {
     @Query("select t from Turma t where t.disciplina.id = :disciplinaId and t.semestre.id = :semestreId")
     Optional<Turma> findTurmaByDisciplinaAndSemestre(Long disciplinaId, Long semestreId);
 
-    
 }

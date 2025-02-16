@@ -1,8 +1,10 @@
 package br.edu.br.meuprimeirospringboot.controllers;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import br.edu.br.meuprimeirospringboot.entity.Aluno;
 import br.edu.br.meuprimeirospringboot.entity.Turma;
@@ -113,7 +119,6 @@ public class TurmaController {
                 attr.addFlashAttribute("mensagem", "Selecione pelo menos um aluno para matricular.");
                 return "redirect:/turmas/matricular/" + turmaId;
             }
-            
             turmaService.matricularAlunos(turmaId, alunosIds);
             attr.addFlashAttribute("mensagem", "Alunos matriculados com sucesso!");
             
@@ -122,5 +127,81 @@ public class TurmaController {
             attr.addFlashAttribute("mensagem", "Erro ao matricular alunos: " + e.getMessage());
             return "redirect:/turmas/matricular/" + turmaId;
         }
+    }
+
+    @GetMapping("/{id}/alunos")
+    public String listarAlunosTurma(@PathVariable("id") Long turmaId, ModelMap model) {
+        try {
+            Turma turma = turmaService.buscarPorId(turmaId);
+            if (turma == null) {
+                return "redirect:/turmas/listar";
+            }
+            
+            model.addAttribute("turma", turma);
+            model.addAttribute("titulo", "Alunos da Turma");
+            model.addAttribute("conteudo", "turma/alunos");
+            
+            return "index";
+        } catch (Exception e) {
+            return "redirect:/turmas/listar";
+        }
+    }
+
+    @GetMapping("/{turmaId}/remover-aluno/{alunoId}")
+    public String removerAlunoDaTurma(@PathVariable("turmaId") Long turmaId,
+                                     @PathVariable("alunoId") Long alunoId,
+                                     RedirectAttributes attr) {
+        try {
+            turmaService.removerAluno(turmaId, alunoId);
+            attr.addFlashAttribute("mensagem", "Aluno removido da turma com sucesso!");
+        } catch (Exception e) {
+            attr.addFlashAttribute("mensagem", "Erro ao remover aluno: " + e.getMessage());
+        }
+        
+        return "redirect:/turmas/" + turmaId + "/alunos";
+    }
+
+    @GetMapping("/gerar-relatorio")
+    public ResponseEntity<byte[]> gerarRelatorioTurmasComAlunos() {
+        List<Turma> turmas = turmaService.buscarTodas();
+
+        byte[] pdfBytes = gerarPdfComTurmasEAlunos(turmas);
+
+        return ResponseEntity.ok()
+                .header("Content-Type", "application/pdf")
+                .header("Content-Disposition", "attachment; filename=relatorio_turmas_com_alunos.pdf")
+                .body(pdfBytes);
+    }
+
+     private byte[] gerarPdfComTurmasEAlunos(List<Turma> turmas) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        try {
+            Document document = new Document();
+            PdfWriter.getInstance(document, outputStream);
+            document.open();
+
+            document.add(new Paragraph("Relatório de alunos matriculados por turma"));
+            document.add(new Paragraph(" "));
+            
+            for (Turma turma : turmas) {
+                document.add(new Paragraph("Turma: " + turma.getId()));
+                document.add(new Paragraph("Disciplina: " + turma.getDisciplina().getNome()));
+                document.add(new Paragraph("Professor: " + turma.getProfessor().getNome()));
+                document.add(new Paragraph("Semestre: " + turma.getSemestre().getAno() + " - " + turma.getSemestre().getSemestre()));
+                document.add(new Paragraph(" "));
+
+                document.add(new Paragraph("Alunos Matriculados:"));
+                for (Aluno aluno : turma.getAlunos()) {
+                    document.add(new Paragraph("Aluno: " + aluno.getNome()));
+                }
+                document.add(new Paragraph(" "));
+            }
+            
+            document.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return outputStream.toByteArray();
     }
 }

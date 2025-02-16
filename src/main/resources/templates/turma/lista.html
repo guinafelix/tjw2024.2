@@ -6,6 +6,10 @@
           <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
           <span>Cadastrar Turma</span>
         </a>
+        <a class="btn btn-success btn-md" th:href="@{/turmas/gerar-relatorio}" role="button">
+          <span class="oi oi-print" title="Gerar Relatório" aria-hidden="true"></span>
+          <span>Gerar Relatório de Turmas com Alunos</span>
+        </a>
       </div>
     </nav>
 
@@ -42,6 +46,10 @@
 
                 <a class="btn btn-danger btn-sm" th:href="@{/turmas/matricular/{id} (id=${turma.id})}" role="button">
                   <span class="oi oi-plus" title="Cadastrar Alunos" aria-hidden="true"></span>
+                </a>
+
+                <a class="btn btn-info btn-sm" th:href="@{/turmas/{id}/alunos(id=${turma.id})}" role="button">
+                  <span class="oi oi-people" title="Ver Alunos" aria-hidden="true"></span>
                 </a>
               </td>
             </tr>

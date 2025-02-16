@@ -182,3 +182,7 @@ body {
 .form-footer a:hover {
     text-decoration: underline;
 }
+
+.navbar-expand-md .navbar-collapse {
+    gap: 8px;
+}

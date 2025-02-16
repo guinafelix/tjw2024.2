@@ -3,7 +3,9 @@ package br.edu.br.meuprimeirospringboot.entity;
 import jakarta.persistence.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "tbl_turma")
@@ -31,8 +33,13 @@ public class Turma {
     @Column(name = "hora_fim", nullable = false)
     private LocalTime horaFim;
 
-    @ManyToMany(mappedBy = "turmas")
-    private List<Aluno> alunos = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "turma_aluno",
+        joinColumns = @JoinColumn(name = "turma_id"),
+        inverseJoinColumns = @JoinColumn(name = "aluno_id")
+    )
+    private Set<Aluno> alunos = new HashSet<>();
 
     // Getters e Setters
 
@@ -84,11 +91,21 @@ public class Turma {
         this.horaFim = horaFim;
     }
 
-    public List<Aluno> getAlunos() {
+    public Set<Aluno> getAlunos() {
         return alunos;
     }
 
-    public void setAlunos(List<Aluno> alunos) {
+     public void setAlunos(Set<Aluno> alunos) {
+        if (this.alunos != null) {
+            for (Aluno aluno : this.alunos) {
+                aluno.getTurmas().remove(this);
+            }
+        }
         this.alunos = alunos;
+        if (alunos != null) {
+            for (Aluno aluno : alunos) {
+                aluno.getTurmas().add(this);
+            }
+        }
     }
 }
