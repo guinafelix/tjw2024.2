@@ -23,6 +23,7 @@ br/edu/br/meuprimeirospringboot/service/ProfessorService.class
 br/edu/br/meuprimeirospringboot/entity/Turma.class
 br/edu/br/meuprimeirospringboot/controllers/TurmaController.class
 br/edu/br/meuprimeirospringboot/repository/AlunosCustimReoository.class
+br/edu/br/meuprimeirospringboot/controllers/MatriculaController.class
 br/edu/br/meuprimeirospringboot/entity/Endereco.class
 br/edu/br/meuprimeirospringboot/repository/AlunoRepository.class
 br/edu/br/meuprimeirospringboot/entity/Telefone.class

@@ -31,10 +31,15 @@
 	</properties>
 	<repositories>
     <repository>
+        <id>central</id>
+        <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+    <repository>
         <id>itext-repo</id>
         <url>https://repo.itextpdf.com</url>
     </repository>
-</repositories>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -75,6 +80,16 @@
    			<artifactId>bootstrap</artifactId>
     		<version>5.3.3</version>
 		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.6.0</version>
+	</dependency>
+	<dependency>
+    <groupId>org.webjars.npm</groupId>
+    <artifactId>jquery-mask-plugin</artifactId>
+    <version>1.14.16</version>
+</dependency>
 		<dependency>
     		<groupId>org.webjars.bowergithub.iconic</groupId>
     		<artifactId>open-iconic</artifactId>
