@@ -49,7 +49,9 @@ public class SemestreController {
     @GetMapping("/editar/{id}")
     public String preEditarSemestre(@PathVariable("id") Long id, ModelMap model) {
         model.addAttribute("semestre", semestreService.buscarPorId(id));
-        return "/semestre/cadastro";
+        model.addAttribute("titulo", "Editar Semestre");
+        model.addAttribute("conteudo", "semestre/cadastro");
+        return "index";
     }
     
     @PostMapping("/editar")

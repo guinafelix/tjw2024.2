@@ -80,7 +80,12 @@ public class TurmaController {
     @GetMapping("/editar/{id}")
     public String preEditarTurma(@PathVariable("id") Long id, ModelMap model) {
         model.addAttribute("turma", turmaService.buscarPorId(id));
-        return "/turma/cadastro";
+        model.addAttribute("disciplinas", disciplinaService.buscarTodas());
+        model.addAttribute("semestres", semestreService.buscarTodos());
+        model.addAttribute("professores", professorServiceImpl.buscarTodos());
+        model.addAttribute("titulo", "Editar Turma");
+        model.addAttribute("conteudo", "turma/cadastro");
+        return "index";
     }
     
     @PostMapping("/editar")

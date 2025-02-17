@@ -49,7 +49,9 @@ public class DisciplinaController {
     @GetMapping("/editar/{id}")
     public String preEditarDisciplina(@PathVariable("id") Long id, ModelMap model) {
         model.addAttribute("disciplina", disciplinaService.buscarPorId(id));
-        return "/disciplina/cadastro";
+        model.addAttribute("titulo", "Editar Disciplina");
+        model.addAttribute("conteudo", "disciplina/cadastro");
+        return "index";
     }
     
     @PostMapping("/editar")

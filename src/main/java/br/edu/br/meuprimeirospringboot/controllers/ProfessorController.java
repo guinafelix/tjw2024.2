@@ -49,7 +49,9 @@ public class ProfessorController {
     @GetMapping("/editar/{id}")
     public String preEditarProfessor(@PathVariable("id") Long id, ModelMap model) {
         model.addAttribute("professor", professorService.buscarPorId(id));
-        return "/professor/cadastro";
+        model.addAttribute("conteudo", "professor/cadastro");
+        model.addAttribute("titulo", "Editar Professor");
+        return "index";
     }
     
     @PostMapping("/editar")
