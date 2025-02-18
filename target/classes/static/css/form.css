@@ -47,13 +47,13 @@ body {
     transition: border-color 0.3s;
 }
 .form-group input:focus {
-    border-color: #1e94d2;
+    border-color: #222FBF;
     outline: none;
 }
 .form-group button {
     width: 100%;
     padding: 0.8rem;
-    background-color: #1e94d2;
+    background-color: #222FBF;
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -71,7 +71,7 @@ body {
     color: #777;
 }
 .form-footer a {
-    color: #1e94d2;
+    color: #222FBF;
     text-decoration: none;
 }
 .form-footer a:hover {

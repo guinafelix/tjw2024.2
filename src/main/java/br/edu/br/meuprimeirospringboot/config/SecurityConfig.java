@@ -16,7 +16,7 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/","/css/**", "/js/**", "/image/**", "/webjars/**").permitAll() // Libera acesso para a URL "/"
-                .requestMatchers("/alunos/cadastrar").hasRole("ADMIN") // Apenas ADMIN pode acessar
+                .requestMatchers("/alunos/cadastrar").hasRole("ADMIN") 
                 .anyRequest().authenticated()    
             )
             .logout(logout -> logout
